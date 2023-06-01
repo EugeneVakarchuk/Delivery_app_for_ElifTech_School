@@ -2,22 +2,37 @@ const CartModel = require("../models/cart-model");
 const ShopService = require("../services/shop-service");
 
 class CartService {
-  async addNewCart(shop) {
-    const shopId = await ShopService.getShopIdByTitle(shop);
-
-    if (!shopId) {
-      throw new Error("Shop not found");
-    }
+  async addNewCart(shopTitle) {
+    const shopId = await ShopService.getShopIdByTitle(shopTitle);
 
     const existingCart = await CartModel.findOne({ shop: shopId });
 
     if (existingCart) {
-      throw new Error("Cart for this shop already exists");
+      return existingCart;
     }
 
-    const newCart = await CartModel.create({ shop: shopId, totalAmount: 0 });
+    const newCart = await CartModel.create({
+      shop: shopId,
+      totalAmount: 0,
+      goods: [],
+    });
 
     return newCart;
+  }
+
+  async changeCartShop(cartId, newShopTitle) {
+    const shopId = await ShopService.getShopIdByTitle(newShopTitle);
+
+    const updatedCart = await CartModel.findByIdAndUpdate(
+      cartId,
+      {
+        shop: shopId,
+        goods: [],
+      },
+      { new: true }
+    );
+
+    return updatedCart;
   }
 }
 

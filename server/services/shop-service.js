@@ -8,6 +8,15 @@ class ShopService {
 
     return shopNames;
   }
+
+  async getShopIdByTitle(shopTitle) {
+    const shop = await ShopModel.findOne({ shopTitle: shopTitle });
+    if (shop) {
+      return shop._id;
+    } else {
+      return null;
+    }
+  }
 }
 
 module.exports = new ShopService();

@@ -12,6 +12,19 @@ class CartController {
       console.log(error);
     }
   }
+
+  async changeCartShop(req, res, next) {
+    try {
+      const { cartId, newShopTitle } = req.body;
+
+      const cart = await CartService.changeCartShop(cartId, newShopTitle);
+
+      return res.json(cart);
+    } catch (error) {
+      console.log(error);
+      console.log(error);
+    }
+  }
 }
 
 module.exports = new CartController();
