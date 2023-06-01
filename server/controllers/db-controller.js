@@ -1,5 +1,4 @@
 const DBService = require("../services/db-service");
-const ShopModel = require("../models/shop-model");
 
 class DBController {
   async addShop(req, res, next) {
