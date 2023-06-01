@@ -22,7 +22,6 @@ class CartController {
       return res.json(cart);
     } catch (error) {
       console.log(error);
-      console.log(error);
     }
   }
 }
