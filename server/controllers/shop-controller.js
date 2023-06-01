@@ -1,8 +1,11 @@
-const ShopServices = require("../services/shop-services");
+const ShopService = require("../services/shop-service");
 
 class ShopController {
-  async getShopList(req, res, next) {
+  async getShopsList(req, res, next) {
     try {
+      const shops = await ShopService.getShopsList(req.params.shopName);
+
+      return res.json(shops);
     } catch (error) {
       console.log(error);
     }
