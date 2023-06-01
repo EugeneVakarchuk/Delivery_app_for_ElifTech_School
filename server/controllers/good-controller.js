@@ -3,7 +3,7 @@ const GoodService = require("../services/good-service");
 class GoodController {
   async getGoodsByShops(req, res, next) {
     try {
-      const shopTitle = req.params.shopTitle;
+      const shopTitle = req.params.shopName;
 
       const goods = await GoodService.getGoodsByShop(shopTitle);
 
