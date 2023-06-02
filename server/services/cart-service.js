@@ -23,9 +23,6 @@ class CartService {
 	async changeCartShop(cartId, shopTitle) {
 		const shopId = await ShopService.getShopIdByTitle(shopTitle);
 
-		console.log(`cartId ${cartId}`);
-		console.log(`shopId ${shopId}`);
-
 		const updatedCart = await CartModel.findByIdAndUpdate(
 			cartId,
 			{

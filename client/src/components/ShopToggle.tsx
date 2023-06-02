@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import ShopButton from "../ui/ShopButton";
 import ShopService from "../services/ShopService";
-import {useAppDispatch} from "../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {setShop} from "../redux/shopSlice";
 import CartService from "../services/CartService";
 
@@ -12,6 +12,8 @@ type props = {
 const ShopToggle: React.FC<props> = (props) => {
 	const [shopId, setShopId] = useState();
 	const dispatch = useAppDispatch();
+	const [isThisShopSelected, setIsThisShopSelected] = useState(false);
+	const selectedShop = useAppSelector((state) => state.shopReducer.title);
 
 	useEffect(() => {
 		const getShopIdByTitle = async (shopTitle: string) => {
@@ -63,6 +65,14 @@ const ShopToggle: React.FC<props> = (props) => {
 			}
 		}
 	};
+
+	useEffect(() => {
+		if (selectedShop === props.shopTitle) {
+			setIsThisShopSelected(true);
+		} else {
+			setIsThisShopSelected(false);
+		}
+	}, [selectedShop]);
 
 	return (
 		<div onClick={changeShop}>

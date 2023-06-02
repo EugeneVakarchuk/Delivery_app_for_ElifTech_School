@@ -2,8 +2,8 @@ const ShopModel = require("../models/shop-model");
 const GoodModel = require("../models/good-model");
 
 class GoodService {
-	async getGoodsByShop(shopTitle) {
-		const shop = await ShopModel.findOne({shopTitle: shopTitle});
+	async getGoodsByShop(shopId) {
+		const shop = await ShopModel.findOne({_id: shopId});
 
 		if (!shop) {
 			throw new Error("Shop not found");

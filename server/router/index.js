@@ -11,7 +11,7 @@ router.post("/addGood", dbController.addGood);
 router.get("/getshops", shopController.getShopsList);
 router.get("/shop/title/:shopTitle", shopController.getShopByTitle);
 router.get("/shop/id/:shopId", shopController.getShopById);
-router.get("/goods/:shopTitle", goodController.getGoodsByShops);
+router.get("/goods/:shopId", goodController.getGoodsByShops);
 router.post("/cart/newCart", cartController.newCart);
 router.post(
 	"/cart/changeShop/:cartId/:shopTitle",

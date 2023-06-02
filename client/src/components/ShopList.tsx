@@ -36,8 +36,18 @@ const ShopList: React.FC = () => {
 			}
 		};
 
-		const cart = localStorage.getItem("cart");
-		if (!cart && shopListLoaded) {
+		const updateShopIfHaveCart = async (cartId: string) => {
+			try {
+				const shopId = await CartService.getShopByCartId(cartId);
+				const shop = await ShopService.getShopById(shopId);
+				return shop;
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		const cartId = localStorage.getItem("cartId");
+		if (!cartId && shopListLoaded) {
 			createNewCart().then((newCart) => {
 				CartService.saveCartInStorage(newCart._id);
 				const shopId = newCart.shop;
@@ -50,8 +60,15 @@ const ShopList: React.FC = () => {
 					);
 				});
 			});
-		} else {
-			console.log("Cart has already been created");
+		} else if (shopListLoaded) {
+			updateShopIfHaveCart(cartId).then((shop) => {
+				dispatch(
+					setShop({
+						title: shop.shopTitle,
+						id: shop._id,
+					})
+				);
+			});
 		}
 	}, [shops, shopListLoaded]);
 

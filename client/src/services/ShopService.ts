@@ -1,5 +1,4 @@
 import $api from "../http";
-import {IShop} from "../models/IShop";
 
 export default class ShopService {
 	static async getShopList() {
