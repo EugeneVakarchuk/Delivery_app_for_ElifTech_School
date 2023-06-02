@@ -5,7 +5,13 @@ import { Link } from "react-router-dom";
 const MainLayout: React.FC = () => {
   return (
     <div>
-      <Outlet />
+      <div>
+        <Link to="shop">Shop</Link>
+        <Link to="cart">Cart</Link>
+      </div>
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 };

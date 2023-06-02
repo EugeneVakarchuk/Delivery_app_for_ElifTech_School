@@ -1,27 +1,27 @@
-const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const dotenv = require('dotenv');
-const Dotenv = require('dotenv-webpack');
+const path = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
+const dotenv = require("dotenv");
+const Dotenv = require("dotenv-webpack");
 
 dotenv.config();
-
 
 module.exports = {
   mode: "development",
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, "dist"),
     filename: "[name].[hash].js",
-    publicPath: '/'
+    publicPath: "/",
   },
   watch: true,
   devServer: {
     port: 3000,
+    historyApiFallback: true,
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: "./src/index.html"
+      template: "./src/index.html",
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
@@ -37,16 +37,16 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: '[local]_[hash:base64:5]'
-              }
-            }
+                localIdentName: "[local]_[hash:base64:5]",
+              },
+            },
           },
           { loader: "less-loader" },
         ],
       },
       {
         test: /\.(jpeg|jpg|svg|png)$/,
-        use: ["file-loader"]
+        use: ["file-loader"],
       },
       {
         test: /\.m?js$/,
@@ -54,23 +54,23 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader'
-      }
-    ]
+        loader: "ts-loader",
+      },
+    ],
   },
   resolve: {
     fallback: {
       fs: false,
-      path: require.resolve('path-browserify'),
-      os: require.resolve('os-browserify/browser')
+      path: require.resolve("path-browserify"),
+      os: require.resolve("os-browserify/browser"),
     },
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: [".tsx", ".ts", ".js"],
   },
-}
+};
