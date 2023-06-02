@@ -9,8 +9,14 @@ const router = new Router();
 router.post("/addShop", dbController.addShop);
 router.post("/addGood", dbController.addGood);
 router.get("/getshops", shopController.getShopsList);
-router.get("/goods/:shopName", goodController.getGoodsByShops);
+router.get("/shop/title/:shopTitle", shopController.getShopByTitle);
+router.get("/shop/id/:shopId", shopController.getShopById);
+router.get("/goods/:shopTitle", goodController.getGoodsByShops);
 router.post("/cart/newCart", cartController.newCart);
-router.post("/cart/changeShop", cartController.changeCartShop);
+router.post(
+	"/cart/changeShop/:cartId/:shopTitle",
+	cartController.changeCartShop
+);
+router.get("/cart/getShop/:cartId", cartController.getShopByCartId);
 
 module.exports = router;

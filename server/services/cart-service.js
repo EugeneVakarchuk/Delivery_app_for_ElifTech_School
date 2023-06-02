@@ -2,38 +2,50 @@ const CartModel = require("../models/cart-model");
 const ShopService = require("../services/shop-service");
 
 class CartService {
-  async addNewCart(shopTitle) {
-    const shopId = await ShopService.getShopIdByTitle(shopTitle);
+	async addNewCart(shopTitle) {
+		const shopId = await ShopService.getShopIdByTitle(shopTitle);
 
-    const existingCart = await CartModel.findOne({ shop: shopId });
+		const existingCart = await CartModel.findOne({shop: shopId});
 
-    if (existingCart) {
-      return existingCart;
-    }
+		if (existingCart) {
+			return existingCart;
+		}
 
-    const newCart = await CartModel.create({
-      shop: shopId,
-      totalAmount: 0,
-      goods: [],
-    });
+		const newCart = await CartModel.create({
+			shop: shopId,
+			totalAmount: 0,
+			goods: [],
+		});
 
-    return newCart;
-  }
+		return newCart;
+	}
 
-  async changeCartShop(cartId, newShopTitle) {
-    const shopId = await ShopService.getShopIdByTitle(newShopTitle);
+	async changeCartShop(cartId, shopTitle) {
+		const shopId = await ShopService.getShopIdByTitle(shopTitle);
 
-    const updatedCart = await CartModel.findByIdAndUpdate(
-      cartId,
-      {
-        shop: shopId,
-        goods: [],
-      },
-      { new: true }
-    );
+		console.log(`cartId ${cartId}`);
+		console.log(`shopId ${shopId}`);
 
-    return updatedCart;
-  }
+		const updatedCart = await CartModel.findByIdAndUpdate(
+			cartId,
+			{
+				shop: shopId,
+				goods: [],
+			},
+			{new: true}
+		);
+
+		return updatedCart;
+	}
+
+	async getShopByCartId(cartId) {
+		const cart = await CartModel.findById(cartId).populate("shop");
+		if (cart) {
+			return cart.shop._id;
+		} else {
+			return null;
+		}
+	}
 }
 
 module.exports = new CartService();
