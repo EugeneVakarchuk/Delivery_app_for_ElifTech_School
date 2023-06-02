@@ -1,5 +1,6 @@
 const CartModel = require("../models/cart-model");
 const ShopService = require("../services/shop-service");
+const GoodModel = require("../models/good-model");
 
 class CartService {
 	async addNewCart(shopTitle) {
@@ -26,8 +27,11 @@ class CartService {
 		const updatedCart = await CartModel.findByIdAndUpdate(
 			cartId,
 			{
-				shop: shopId,
-				goods: [],
+				$set: {
+					shop: shopId,
+					totalAmount: 0,
+					items: [],
+				},
 			},
 			{new: true}
 		);
@@ -41,6 +45,31 @@ class CartService {
 			return cart.shop._id;
 		} else {
 			return null;
+		}
+	}
+
+	async addGoodToCart(goodId, cartId) {
+		try {
+			const good = await GoodModel.findById(goodId);
+			const cart = await CartModel.findById(cartId);
+
+			if (!good || !cart) {
+				throw new Error("No good or cart found");
+			}
+			const newItem = {
+				good: goodId,
+				quantity: 1,
+			};
+
+			cart.items.push(newItem);
+
+			cart.totalAmount += good.goodPrice;
+
+			await cart.save();
+
+			return cart;
+		} catch (error) {
+			console.log(error);
 		}
 	}
 }

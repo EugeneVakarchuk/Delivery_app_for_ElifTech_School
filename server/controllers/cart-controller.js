@@ -38,6 +38,19 @@ class CartController {
 			console.log(error);
 		}
 	}
+
+	async addGoodToCart(req, res, next) {
+		try {
+			const goodId = req.params.goodId;
+			const cartId = req.params.cartId;
+
+			const updatedCart = await CartService.addGoodToCart(goodId, cartId);
+
+			return res.json(updatedCart);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = new CartController();

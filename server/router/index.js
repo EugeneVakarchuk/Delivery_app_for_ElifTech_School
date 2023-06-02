@@ -18,5 +18,6 @@ router.post(
 	cartController.changeCartShop
 );
 router.get("/cart/getShop/:cartId", cartController.getShopByCartId);
+router.post("/cart/addGood/:goodId/:cartId", cartController.addGoodToCart);
 
 module.exports = router;

@@ -4,6 +4,7 @@ import ShopService from "../services/ShopService";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {setShop} from "../redux/shopSlice";
 import CartService from "../services/CartService";
+import {configureStore} from "@reduxjs/toolkit";
 
 type props = {
 	shopTitle: string;
@@ -35,7 +36,10 @@ const ShopToggle: React.FC<props> = (props) => {
 	};
 
 	const changeShopInCart = async (cartId: string, shopTitle: string) => {
-		const updatedCart = await CartService.changeCartShop(cartId, shopTitle);
+		const updatedCart = await CartService.changeShopInCart(
+			cartId,
+			shopTitle
+		);
 		return updatedCart;
 	};
 
@@ -51,14 +55,12 @@ const ShopToggle: React.FC<props> = (props) => {
 					cartId,
 					props.shopTitle
 				);
-				console.log(updatedCart);
 				dispatch(
 					setShop({
 						id: shopId,
 						title: props.shopTitle,
 					})
 				);
-				console.log([shopId, cartShopId]);
 				console.log("User push ok");
 			} else {
 				console.log("User push cancel");

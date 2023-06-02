@@ -27,10 +27,21 @@ export default class CartService {
 		}
 	}
 
-	static async changeCartShop(cartId: string, shopTitle: string) {
+	static async changeShopInCart(cartId: string, shopTitle: string) {
 		try {
 			const response = await $api.post(
 				`/cart/changeShop/${cartId}/${shopTitle}`
+			);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async addGoodToCart(goodId: string, cartId: string) {
+		try {
+			const response = await $api.post(
+				`/cart/addGood/${goodId}/${cartId}`
 			);
 			return response.data;
 		} catch (error) {
