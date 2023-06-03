@@ -48,4 +48,35 @@ export default class CartService {
 			console.log(error);
 		}
 	}
+
+	static async getGoodsInCart(cartId: string) {
+		try {
+			const response = await $api.get(`/cart/getGoods/${cartId}`);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async plusQuanityGoodInCart(cartId: string, goodId: string) {
+		try {
+			const response = await $api.post(
+				`/cart/plusQuanity/${cartId}/${goodId}`
+			);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async minusQuanityGoodInCart(cartId: string, goodId: string) {
+		try {
+			const response = await $api.post(
+				`/cart/minusQuanity/${cartId}/${goodId}`
+			);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }

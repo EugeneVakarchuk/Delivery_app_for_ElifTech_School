@@ -19,5 +19,14 @@ router.post(
 );
 router.get("/cart/getShop/:cartId", cartController.getShopByCartId);
 router.post("/cart/addGood/:goodId/:cartId", cartController.addGoodToCart);
+router.get("/cart/getGoods/:cartId", cartController.getGoodsInCart);
+router.post(
+	"/cart/plusQuanity/:cartId/:goodId",
+	cartController.plusQuanityGoodInCart
+);
+router.post(
+	"/cart/minusQuanity/:cartId/:goodId",
+	cartController.minusQuanityGoodInCart
+);
 
 module.exports = router;

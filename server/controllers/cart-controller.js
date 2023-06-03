@@ -51,6 +51,47 @@ class CartController {
 			console.log(error);
 		}
 	}
+
+	async getGoodsInCart(req, res, next) {
+		try {
+			const cartID = req.params.cartId;
+			const cartItems = await CartService.getGoodsInCart(cartID);
+
+			return res.json(cartItems);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async plusQuanityGoodInCart(req, res, next) {
+		try {
+			const {cartId, goodId} = req.params;
+
+			const updateCart = await CartService.plusQuanityGoodInCart(
+				cartId,
+				goodId
+			);
+
+			return res.json(updateCart);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async minusQuanityGoodInCart(req, res, next) {
+		try {
+			const {cartId, goodId} = req.params;
+
+			const updateCart = await CartService.minusQuanityGoodInCart(
+				cartId,
+				goodId
+			);
+
+			return res.json(updateCart);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = new CartController();

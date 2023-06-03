@@ -72,6 +72,70 @@ class CartService {
 			console.log(error);
 		}
 	}
+
+	async getGoodsInCart(cartId) {
+		try {
+			const cart = await CartModel.findById(cartId).populate(
+				"items.good"
+			);
+			if (!cart) {
+				throw new Error("Cart not found");
+			}
+			return cart.items;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async plusQuanityGoodInCart(cartId, goodId) {
+		try {
+			const cart = await CartModel.findById(cartId);
+			if (!cart) {
+				throw new Error("Cart not found");
+			}
+
+			const item = cart.items.find(
+				(item) => item._id.toString() === goodId
+			);
+			if (!item) {
+				throw new Error("Item not found in cart");
+			}
+
+			item.quantity++;
+			await cart.save();
+
+			return cart;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async minusQuanityGoodInCart(cartId, goodId) {
+		try {
+			const cart = await CartModel.findById(cartId);
+			if (!cart) {
+				throw new Error("Cart not found");
+			}
+
+			const item = cart.items.find(
+				(item) => item._id.toString() === goodId
+			);
+			if (!item) {
+				throw new Error("Item not found in cart");
+			}
+
+			if (item.quantity > 1) {
+				item.quantity--;
+			} else {
+				console.log("Quantity cannot be less than 1");
+			}
+			await cart.save();
+
+			return cart;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = new CartService();
