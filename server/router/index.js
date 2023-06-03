@@ -33,5 +33,6 @@ router.post(
 	cartController.removeGoodInCart
 );
 router.get("/cart/totalAmount/:cartId", cartController.getTotalAmount);
+router.get("/cart/:cartId/:itemId", cartController.getQuantityItemInCart);
 
 module.exports = router;

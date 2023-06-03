@@ -6,6 +6,7 @@ const CartItemsList: React.FC = () => {
 	const cartId = localStorage.getItem("cartId");
 	const [goodsList, setGoodsList] = useState([]);
 	const [isRemoving, setIsRemoving] = useState(false);
+	const [isUpdated, setIsUpdated] = useState(false);
 	const [totalAmount, setTotalAmount] = useState(0);
 
 	const getGoodsInCart = async () => {
@@ -19,10 +20,9 @@ const CartItemsList: React.FC = () => {
 		}
 	};
 
-	const removeItemFromCart = async (itemId: string) => {
+	const removeGoodsList = async (itemId: string) => {
 		setIsRemoving(true);
 		try {
-			await CartService.removeGoodInCart(cartId, itemId);
 			const updatedGoodsList = goodsList.filter(
 				(item) => item._id !== itemId
 			);
@@ -36,11 +36,36 @@ const CartItemsList: React.FC = () => {
 		}
 	};
 
+	const onUpdateItemsList = async (cartId: string) => {
+		setIsUpdated(true);
+		try {
+			await CartService.getTotalAmount(cartId).then((newTotalAmount) => {
+				setTotalAmount(newTotalAmount);
+			});
+		} catch (error) {
+			console.log("Error from updating cart items list", error);
+		} finally {
+			setIsUpdated(false);
+		}
+	};
+
+	useEffect(() => {
+		if (isUpdated) {
+			onUpdateItemsList(cartId);
+		}
+	}, [isUpdated]);
+
+	useEffect(() => {
+		if (isRemoving) {
+			getGoodsInCart();
+		}
+	}, [isRemoving]);
+
 	useEffect(() => {
 		if (!!cartId) {
 			getGoodsInCart();
 		}
-	}, [cartId]);
+	}, []);
 
 	return (
 		<div>
@@ -52,10 +77,10 @@ const CartItemsList: React.FC = () => {
 						key={item._id}
 						id={item._id}
 						title={item.good.goodTitle}
-						quantity={item.quantity}
 						price={item.good.goodPrice}
 						isRemoving={isRemoving}
-						onRemove={removeItemFromCart}
+						onRemove={removeGoodsList}
+						onUpdateItemsList={onUpdateItemsList}
 					/>
 				))
 			)}

@@ -9,17 +9,13 @@ type props = {
 const RemoveCartItemButton: React.FC<props> = (props) => {
 	const cartId = localStorage.getItem("cartId");
 
-	const removeItemInCart = async () => {
-		props.onRemove(props.itemId);
-
-		const updateCart = await CartService.removeGoodInCart(
-			cartId,
-			props.itemId
-		);
-		console.log(updateCart);
+	const removeClickButton = async () => {
+		await CartService.removeGoodInCart(cartId, props.itemId).then(() => {
+			props.onRemove(props.itemId);
+		});
 	};
 
-	return <button onClick={removeItemInCart}>Remove Item</button>;
+	return <button onClick={removeClickButton}>Remove Item</button>;
 };
 
 export default RemoveCartItemButton;

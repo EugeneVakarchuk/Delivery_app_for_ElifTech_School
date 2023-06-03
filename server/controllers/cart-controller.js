@@ -119,6 +119,17 @@ class CartController {
 			console.log(error);
 		}
 	}
+
+	async getQuantityItemInCart(req, res, next) {
+		const {cartId, itemId} = req.params;
+
+		const quantityItem = await CartService.getQuantityItemInCart(
+			cartId,
+			itemId
+		);
+
+		return res.json(quantityItem);
+	}
 }
 
 module.exports = new CartController();

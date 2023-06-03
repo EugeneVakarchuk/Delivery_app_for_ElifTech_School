@@ -94,7 +94,17 @@ export default class CartService {
 
 	static async getTotalAmount(cartId: string) {
 		try {
-			const response = await $api.get(`cart/totalAmount/${cartId}`);
+			const response = await $api.get(`/cart/totalAmount/${cartId}`);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async getQuantityItem(cartId: string, itemId: string) {
+		try {
+			const response = await $api.get(`/cart/${cartId}/${itemId}`);
+
 			return response.data;
 		} catch (error) {
 			console.log(error);

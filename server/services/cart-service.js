@@ -137,7 +137,7 @@ class CartService {
 				throw new Error("Good not found");
 			}
 
-			item.quantity++;
+			item.quantity--;
 
 			cart.totalAmount -= good.goodPrice;
 
@@ -199,6 +199,28 @@ class CartService {
 		} catch (error) {
 			console.log("Error retrieving total amount:", error);
 			throw error;
+		}
+	}
+
+	async getQuantityItemInCart(cartId, itemId) {
+		try {
+			const cart = await CartModel.findById(cartId);
+
+			if (!cart) {
+				throw new Error("Cart not found");
+			}
+
+			const item = cart.items.find(
+				(item) => item._id.toString() === itemId
+			);
+
+			if (!item) {
+				throw new Error("Item not found in cart");
+			}
+
+			return item.quantity;
+		} catch (error) {
+			console.log(error);
 		}
 	}
 }

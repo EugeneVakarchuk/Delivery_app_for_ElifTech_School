@@ -1,43 +1,29 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import CartService from "../services/CartService";
 
-interface QuanityInputProps {
+type props = {
+	quanity: number;
 	itemId: string;
-	value: number;
-	onChange: (newValue: number) => void;
-}
+	plusQuanityItem: (cartId: string, itemId: string) => void;
+	minusQuanityItem: (cartId: string, itemId: string) => void;
+};
 
-const QuanityInput: React.FC<QuanityInputProps> = ({
-	value,
-	onChange,
-	...props
-}) => {
+const QuanityInput: React.FC<props> = (props) => {
 	const cartId = localStorage.getItem("cartId");
 
-	const handleDecrease = () => {
-		if (value > 1) {
-			onChange(value - 1);
-			CartService.minusQuanityGoodInCart(cartId, props.itemId);
-		}
+	const plusClick = () => {
+		props.plusQuanityItem(cartId, props.itemId);
 	};
 
-	const handleIncrease = () => {
-		onChange(value + 1);
-		CartService.plusQuanityGoodInCart(cartId, props.itemId);
-	};
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const newValue = Number(e.target.value);
-		if (!isNaN(newValue) && newValue >= 1) {
-			onChange(newValue);
-		}
+	const minusClick = () => {
+		props.minusQuanityItem(cartId, props.itemId);
 	};
 
 	return (
 		<div>
-			<button onClick={handleDecrease}>-</button>
-			<input type="number" value={value} onChange={handleChange} />
-			<button onClick={handleIncrease}>+</button>
+			<button onClick={minusClick}>-</button>
+			<input type="number" value={props.quanity} readOnly />
+			<button onClick={plusClick}>+</button>
 		</div>
 	);
 };

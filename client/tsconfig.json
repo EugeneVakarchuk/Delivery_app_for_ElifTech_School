@@ -1,19 +1,19 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "lib": ["esnext", "dom"],
-    "jsx": "react",
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "moduleResolution": "Node",
-    "types": ["node", "react/next", "react-dom/next"],
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
-    ]
-  }
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"noImplicitAny": true,
+		"module": "es6",
+		"target": "es5",
+		"lib": ["esnext", "dom"],
+		"jsx": "react",
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "Node",
+		"types": ["node", "react/next", "react-dom/next"],
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules"
+			}
+		]
+	}
 }
