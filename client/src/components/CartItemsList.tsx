@@ -78,6 +78,7 @@ const CartItemsList: React.FC = () => {
 						id={item._id}
 						title={item.good.goodTitle}
 						price={item.good.goodPrice}
+						imageUrl={item.good.imageUrl}
 						isRemoving={isRemoving}
 						onRemove={removeGoodsList}
 						onUpdateItemsList={onUpdateItemsList}

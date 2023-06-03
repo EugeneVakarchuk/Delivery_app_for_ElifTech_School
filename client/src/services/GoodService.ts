@@ -6,6 +6,7 @@ export default class GoodService {
 			return;
 		} else {
 			const response = await $api.get(`/goods/${shopId}`);
+
 			return response.data;
 		}
 	}

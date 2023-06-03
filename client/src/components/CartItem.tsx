@@ -8,6 +8,7 @@ type props = {
 	id: string;
 	price: number;
 	title: string;
+	imageUrl: string;
 	isRemoving: boolean;
 	onRemove: (itemId: string) => void;
 	onUpdateItemsList: (cartId: string) => void;
@@ -81,6 +82,7 @@ const CartItem: React.FC<props> = (props) => {
 				title={props.title}
 				price={props.price}
 				totalPrice={totalPriceItem}
+				imageUrl={`${process.env.SERVER_URL}${props.imageUrl}`}
 			/>
 			<QuanityInput
 				quanity={quantityItems}

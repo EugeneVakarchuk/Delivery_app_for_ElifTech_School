@@ -48,7 +48,6 @@ const ShopToggle: React.FC<props> = (props) => {
 		const cartShopId = await getShopByCartId(cartId);
 		const cartItems = await CartService.getGoodsInCart(cartId);
 		if (cartItems.length === 0 && shopId !== cartShopId) {
-			console.log("work");
 			await changeShopInCart(cartId, props.shopTitle);
 			dispatch(
 				setShop({

@@ -16,6 +16,7 @@ app.use(
 	})
 );
 app.use("/api", router);
+app.use(express.static("static"));
 
 const start = async () => {
 	try {

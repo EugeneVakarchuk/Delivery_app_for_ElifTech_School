@@ -10,7 +10,7 @@ class DBService {
 		return newShop;
 	}
 
-	async addGood(goodTitle, goodPrice, shopTitle) {
+	async addGood(goodTitle, goodPrice, shopTitle, imageUrl) {
 		const shop = await ShopModel.findOne({shopTitle: shopTitle});
 
 		if (!shop) {
@@ -23,6 +23,7 @@ class DBService {
 			goodTitle,
 			goodPrice,
 			shopId,
+			imageUrl,
 		});
 
 		return newGood;

@@ -15,11 +15,12 @@ class DBController {
 
 	async addGood(req, res, next) {
 		try {
-			const {goodTitle, goodPrice, shopTitle} = req.body;
+			const {goodTitle, goodPrice, shopTitle, imageUrl} = req.body;
 			const newGood = await DBService.addGood(
 				goodTitle,
 				goodPrice,
-				shopTitle
+				shopTitle,
+				imageUrl
 			);
 
 			return res.json(newGood);

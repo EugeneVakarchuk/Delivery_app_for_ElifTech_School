@@ -15,7 +15,6 @@ const GoodItem: React.FC<IGood> = (props) => {
 
 	const checkingGoodInCart = async () => {
 		await CartService.isGoodInCart(cartId, goodId).then((result) => {
-			console.log(result);
 			setGoodAddedToCart(result);
 		});
 	};
@@ -26,7 +25,11 @@ const GoodItem: React.FC<IGood> = (props) => {
 
 	return (
 		<div>
-			<GoodItemUI title={props.goodTitle} price={props.goodPrice} />
+			<GoodItemUI
+				title={props.goodTitle}
+				price={props.goodPrice}
+				imgUrl={`${process.env.SERVER_URL}${props.imageUrl}`}
+			/>
 
 			{goodAddedtoCart ? (
 				<button disabled onClick={addGoodToCart}>

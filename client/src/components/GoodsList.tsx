@@ -39,12 +39,14 @@ const GoodsList: React.FC = () => {
 					<h3>Goods List</h3>
 					<div>
 						{goodsList.map((goodItem, index) => {
+							console.log(goodItem);
 							return (
 								<GoodItem
 									key={index}
 									goodTitle={goodItem.goodTitle}
 									goodPrice={goodItem.goodPrice}
 									_id={goodItem._id}
+									imageUrl={goodItem.imageUrl}
 								/>
 							);
 						})}
