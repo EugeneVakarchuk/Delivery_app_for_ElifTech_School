@@ -32,5 +32,6 @@ router.post(
 	"/cart/removeGoodInCart/:cartId/:goodId",
 	cartController.removeGoodInCart
 );
+router.get("/cart/totalAmount/:cartId", cartController.getTotalAmount);
 
 module.exports = router;

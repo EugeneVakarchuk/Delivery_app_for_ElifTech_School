@@ -107,6 +107,18 @@ class CartController {
 			console.log(error);
 		}
 	}
+
+	async getTotalAmount(req, res, next) {
+		try {
+			const cartId = req.params.cartId;
+
+			const totalAmount = await CartService.getTotalAmount(cartId);
+
+			return res.json(totalAmount);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = new CartController();

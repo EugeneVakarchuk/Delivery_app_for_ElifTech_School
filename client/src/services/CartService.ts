@@ -91,4 +91,13 @@ export default class CartService {
 			console.log(error);
 		}
 	}
+
+	static async getTotalAmount(cartId: string) {
+		try {
+			const response = await $api.get(`cart/totalAmount/${cartId}`);
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }

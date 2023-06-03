@@ -87,7 +87,7 @@ class CartService {
 		}
 	}
 
-	async plusQuanityGoodInCart(cartId, goodId) {
+	async plusQuanityGoodInCart(cartId, itemId) {
 		try {
 			const cart = await CartModel.findById(cartId);
 			if (!cart) {
@@ -95,13 +95,21 @@ class CartService {
 			}
 
 			const item = cart.items.find(
-				(item) => item._id.toString() === goodId
+				(item) => item._id.toString() === itemId
 			);
 			if (!item) {
 				throw new Error("Item not found in cart");
+			}
+
+			const good = await GoodModel.findById(item.good);
+			if (!good) {
+				throw new Error("Good not found");
 			}
 
 			item.quantity++;
+
+			cart.totalAmount += good.goodPrice;
+
 			await cart.save();
 
 			return cart;
@@ -110,7 +118,7 @@ class CartService {
 		}
 	}
 
-	async minusQuanityGoodInCart(cartId, goodId) {
+	async minusQuanityGoodInCart(cartId, itemId) {
 		try {
 			const cart = await CartModel.findById(cartId);
 			if (!cart) {
@@ -118,17 +126,21 @@ class CartService {
 			}
 
 			const item = cart.items.find(
-				(item) => item._id.toString() === goodId
+				(item) => item._id.toString() === itemId
 			);
 			if (!item) {
 				throw new Error("Item not found in cart");
 			}
 
-			if (item.quantity > 1) {
-				item.quantity--;
-			} else {
-				console.log("Quantity cannot be less than 1");
+			const good = await GoodModel.findById(item.good);
+			if (!good) {
+				throw new Error("Good not found");
 			}
+
+			item.quantity++;
+
+			cart.totalAmount -= good.goodPrice;
+
 			await cart.save();
 
 			return cart;
@@ -137,25 +149,48 @@ class CartService {
 		}
 	}
 
-	async removeGoodInCart(cartId, goodId) {
+	async removeGoodInCart(cartId, itemId) {
 		try {
 			const cart = await CartModel.findById(cartId);
 			if (!cart) {
 				throw new Error("Cart not found");
 			}
 			const itemIndex = cart.items.findIndex(
-				(item) => item._id.toString() === goodId
+				(item) => item._id.toString() === itemId
 			);
 			if (itemIndex === -1) {
 				throw new Error("Item not found in cart");
 			}
 
+			const item = cart.items[itemIndex];
+
+			const good = await GoodModel.findById(item.good);
+			if (!good) {
+				throw new Error("Good not found");
+			}
+
 			cart.items.splice(itemIndex, 1);
+
+			cart.totalAmount -= good.goodPrice;
+
 			await cart.save();
 
 			return cart;
 		} catch (error) {
 			console.log(error);
+		}
+	}
+
+	async getTotalAmount(cartId) {
+		try {
+			const cart = await CartModel.findById(cartId);
+			if (!cart) {
+				throw new NotFoundException("Cart not found");
+			}
+			return cart.totalAmount;
+		} catch (error) {
+			console.log("Error retrieving total amount:", error);
+			throw error;
 		}
 	}
 }

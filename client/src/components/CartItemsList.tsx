@@ -54,6 +54,7 @@ const CartItemsList: React.FC = () => {
 					/>
 				))
 			)}
+			<div></div>
 		</div>
 	);
 };
