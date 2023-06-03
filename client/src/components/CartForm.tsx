@@ -3,9 +3,11 @@ import Input from "../ui/Input";
 import {useForm} from "react-hook-form";
 import SubmitButton from "../ui/SubmitButton";
 import OrderService from "../services/OrderService";
+import {useNavigate} from "react-router";
 
 const CartForm: React.FC = () => {
 	const cartId = localStorage.getItem("cartId");
+	const navigate = useNavigate();
 
 	type FormValues = {
 		name: string;
@@ -29,8 +31,12 @@ const CartForm: React.FC = () => {
 			data.tel,
 			data.email,
 			cartId
-		);
-		console.log(newOrder);
+		).then((createdOrder) => {
+			if (createdOrder) {
+				localStorage.removeItem("cartId");
+				navigate("/succesfullbuing");
+			}
+		});
 	};
 
 	return (
