@@ -152,30 +152,38 @@ class CartService {
 	async removeGoodInCart(cartId, itemId) {
 		try {
 			const cart = await CartModel.findById(cartId);
+
 			if (!cart) {
 				throw new Error("Cart not found");
 			}
-			const itemIndex = cart.items.findIndex(
+
+			const item = cart.items.find(
 				(item) => item._id.toString() === itemId
 			);
-			if (itemIndex === -1) {
+			if (!item) {
 				throw new Error("Item not found in cart");
 			}
-
-			const item = cart.items[itemIndex];
 
 			const good = await GoodModel.findById(item.good);
 			if (!good) {
 				throw new Error("Good not found");
 			}
 
-			cart.items.splice(itemIndex, 1);
+			const updatedCart = await CartModel.findOneAndUpdate(
+				{_id: cartId},
+				{$pull: {items: {_id: itemId}}},
+				{new: true}
+			);
 
-			cart.totalAmount -= good.goodPrice;
+			if (!updatedCart) {
+				throw new Error("Failed to update cart");
+			}
 
-			await cart.save();
+			updatedCart.totalAmount -= item.quantity * good.goodPrice;
 
-			return cart;
+			await updatedCart.save();
+
+			return updatedCart;
 		} catch (error) {
 			console.log(error);
 		}

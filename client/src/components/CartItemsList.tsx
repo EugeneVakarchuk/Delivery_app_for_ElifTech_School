@@ -6,11 +6,14 @@ const CartItemsList: React.FC = () => {
 	const cartId = localStorage.getItem("cartId");
 	const [goodsList, setGoodsList] = useState([]);
 	const [isRemoving, setIsRemoving] = useState(false);
+	const [totalAmount, setTotalAmount] = useState(0);
 
 	const getGoodsInCart = async () => {
 		try {
 			const goodsList = await CartService.getGoodsInCart(cartId);
 			setGoodsList(goodsList);
+			const totalAmount = await CartService.getTotalAmount(cartId);
+			setTotalAmount(totalAmount);
 		} catch (error) {
 			console.log("Error fetching goods:", error);
 		}
@@ -24,6 +27,8 @@ const CartItemsList: React.FC = () => {
 				(item) => item._id !== itemId
 			);
 			setGoodsList(updatedGoodsList);
+			const totalAmount = await CartService.getTotalAmount(cartId);
+			setTotalAmount(totalAmount);
 		} catch (error) {
 			console.log("Error removing item from cart:", error);
 		} finally {
@@ -54,7 +59,7 @@ const CartItemsList: React.FC = () => {
 					/>
 				))
 			)}
-			<div></div>
+			<div>totalAmount: {totalAmount}</div>
 		</div>
 	);
 };
