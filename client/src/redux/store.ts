@@ -1,10 +1,8 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import shopReducer from "./shopSlice";
-import capchaReducer from "./capchaSlice";
 
 const rootReducer = combineReducers({
 	shopReducer,
-	capchaReducer,
 });
 
 export const setupStore = () => {

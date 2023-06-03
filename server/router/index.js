@@ -3,6 +3,7 @@ const dbController = require("../controllers/db-controller");
 const shopController = require("../controllers/shop-controller");
 const goodController = require("../controllers/good-controller");
 const cartController = require("../controllers/cart-controller");
+const OrderController = require("../controllers/order-controller");
 
 const router = new Router();
 
@@ -34,5 +35,6 @@ router.post(
 );
 router.get("/cart/totalAmount/:cartId", cartController.getTotalAmount);
 router.get("/cart/:cartId/:itemId", cartController.getQuantityItemInCart);
+router.post("/orgers/createOrder/:cartId", OrderController.createNewOrder);
 
 module.exports = router;

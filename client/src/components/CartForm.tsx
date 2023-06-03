@@ -2,8 +2,11 @@ import React, {useState} from "react";
 import Input from "../ui/Input";
 import {useForm} from "react-hook-form";
 import SubmitButton from "../ui/SubmitButton";
+import OrderService from "../services/OrderService";
 
 const CartForm: React.FC = () => {
+	const cartId = localStorage.getItem("cartId");
+
 	type FormValues = {
 		name: string;
 		email: string;
@@ -19,7 +22,16 @@ const CartForm: React.FC = () => {
 		mode: "onBlur",
 	});
 
-	const onSubmit = async (data: FormValues) => {};
+	const onSubmit = async (data: FormValues) => {
+		const newOrder = await OrderService.createNewOrder(
+			data.name,
+			data.adress,
+			data.tel,
+			data.email,
+			cartId
+		);
+		console.log(newOrder);
+	};
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
