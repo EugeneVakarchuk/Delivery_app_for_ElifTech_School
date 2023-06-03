@@ -223,6 +223,26 @@ class CartService {
 			console.log(error);
 		}
 	}
+
+	async isGoodInCart(cartId, goodId) {
+		try {
+			const cart = await CartModel.findById(cartId);
+			if (!cart) {
+				return false;
+			}
+
+			const item = cart.items.find(
+				(item) => item.good.toString() === goodId.toString()
+			);
+			if (item) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	}
 }
 
 module.exports = new CartService();

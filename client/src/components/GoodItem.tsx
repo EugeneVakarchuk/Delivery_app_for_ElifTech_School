@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {IGood} from "../models/IGood";
 import GoodItemUI from "../ui/GoodItemUI";
 import CartService from "../services/CartService";
@@ -9,16 +9,32 @@ const GoodItem: React.FC<IGood> = (props) => {
 	const [goodAddedtoCart, setGoodAddedToCart] = useState(false);
 
 	const addGoodToCart = async () => {
-		console.log(goodId);
-		console.log(cartId);
-		const updatedCart = await CartService.addGoodToCart(goodId, cartId);
-		console.log(updatedCart);
+		await CartService.addGoodToCart(goodId, cartId);
+		setGoodAddedToCart(true);
 	};
+
+	const checkingGoodInCart = async () => {
+		await CartService.isGoodInCart(cartId, goodId).then((result) => {
+			console.log(result);
+			setGoodAddedToCart(result);
+		});
+	};
+
+	useEffect(() => {
+		checkingGoodInCart();
+	}, []);
 
 	return (
 		<div>
 			<GoodItemUI title={props.goodTitle} price={props.goodPrice} />
-			<button onClick={addGoodToCart}>Add to cart</button>
+
+			{goodAddedtoCart ? (
+				<button disabled onClick={addGoodToCart}>
+					Added
+				</button>
+			) : (
+				<button onClick={addGoodToCart}>Add to Cart</button>
+			)}
 		</div>
 	);
 };

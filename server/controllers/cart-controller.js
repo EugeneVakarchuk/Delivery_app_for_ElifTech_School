@@ -130,6 +130,21 @@ class CartController {
 
 		return res.json(quantityItem);
 	}
+
+	async isGoodInCart(req, res, next) {
+		try {
+			const {cartId, goodId} = req.params;
+
+			const isGoodInCartResult = await CartService.isGoodInCart(
+				cartId,
+				goodId
+			);
+
+			return res.json(isGoodInCartResult);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = new CartController();

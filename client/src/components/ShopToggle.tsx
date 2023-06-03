@@ -46,24 +46,32 @@ const ShopToggle: React.FC<props> = (props) => {
 	const changeShop = async () => {
 		const cartId = localStorage.getItem("cartId");
 		const cartShopId = await getShopByCartId(cartId);
-		if (shopId !== cartShopId) {
-			const confirm = window.confirm(
-				"You can select products from only one shop. When changing the store, the shopping cart will be cleaned. Do you want to change shop?"
+		const cartItems = await CartService.getGoodsInCart(cartId);
+		if (cartItems.length === 0 && shopId !== cartShopId) {
+			console.log("work");
+			await changeShopInCart(cartId, props.shopTitle);
+			dispatch(
+				setShop({
+					id: shopId,
+					title: props.shopTitle,
+				})
 			);
-			if (confirm) {
-				const updatedCart = await changeShopInCart(
-					cartId,
-					props.shopTitle
+		} else {
+			if (shopId !== cartShopId) {
+				const confirm = window.confirm(
+					"You can select products from only one shop. When changing the store, the shopping cart will be cleaned. Do you want to change shop?"
 				);
-				dispatch(
-					setShop({
-						id: shopId,
-						title: props.shopTitle,
-					})
-				);
-				console.log("User push ok");
-			} else {
-				console.log("User push cancel");
+				if (confirm) {
+					await changeShopInCart(cartId, props.shopTitle);
+					dispatch(
+						setShop({
+							id: shopId,
+							title: props.shopTitle,
+						})
+					);
+				} else {
+					console.log("error in changing shop functionality");
+				}
 			}
 		}
 	};

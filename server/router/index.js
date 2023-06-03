@@ -36,5 +36,6 @@ router.post(
 router.get("/cart/totalAmount/:cartId", cartController.getTotalAmount);
 router.get("/cart/:cartId/:itemId", cartController.getQuantityItemInCart);
 router.post("/orgers/createOrder/:cartId", OrderController.createNewOrder);
+router.post("/cart/isgoodincart/:cartId/:goodId", cartController.isGoodInCart);
 
 module.exports = router;

@@ -110,4 +110,16 @@ export default class CartService {
 			console.log(error);
 		}
 	}
+
+	static async isGoodInCart(cartId: string, goodId: string) {
+		try {
+			const response = await $api.post(
+				`/cart/isgoodincart/${cartId}/${goodId}`
+			);
+
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
