@@ -1,14 +1,16 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import shopReducer from "./shopSlice";
+import capchaReducer from "./capchaSlice";
 
 const rootReducer = combineReducers({
-  shopReducer,
+	shopReducer,
+	capchaReducer,
 });
 
 export const setupStore = () => {
-  return configureStore({
-    reducer: rootReducer,
-  });
+	return configureStore({
+		reducer: rootReducer,
+	});
 };
 
 export type RootState = ReturnType<typeof rootReducer>;
