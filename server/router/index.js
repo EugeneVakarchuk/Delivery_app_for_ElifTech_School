@@ -28,5 +28,9 @@ router.post(
 	"/cart/minusQuanity/:cartId/:goodId",
 	cartController.minusQuanityGoodInCart
 );
+router.post(
+	"/cart/removeGoodInCart/:cartId/:goodId",
+	cartController.removeGoodInCart
+);
 
 module.exports = router;

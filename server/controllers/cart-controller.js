@@ -92,6 +92,21 @@ class CartController {
 			console.log(error);
 		}
 	}
+
+	async removeGoodInCart(req, res, next) {
+		try {
+			const {cartId, goodId} = req.params;
+
+			const updatedCart = await CartService.removeGoodInCart(
+				cartId,
+				goodId
+			);
+
+			return res.json(updatedCart);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = new CartController();

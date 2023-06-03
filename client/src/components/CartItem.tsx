@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from "react";
 import CartItemUI from "../ui/CartItemUI";
 import QuanityInput from "./QuanityInput";
+import RemoveCartItemButton from "./RemoveCartItemButton";
 
 type props = {
 	id: string;
 	price: number;
 	title: string;
 	quantity: number;
+	isRemoving: boolean;
+	onRemove: (itemId: string) => void;
 };
 
 const CartItem: React.FC<props> = (props) => {
@@ -21,6 +24,10 @@ const CartItem: React.FC<props> = (props) => {
 		setTotalPriceItem(quantity * props.price);
 	}, [quantity]);
 
+	const handleRemoveItem = () => {
+		props.onRemove(props.id);
+	};
+
 	return (
 		<div>
 			<CartItemUI
@@ -33,6 +40,14 @@ const CartItem: React.FC<props> = (props) => {
 				onChange={handleQuantityChange}
 				value={quantity}
 			/>
+			{props.isRemoving ? (
+				<div>Removing...</div>
+			) : (
+				<RemoveCartItemButton
+					onRemove={handleRemoveItem}
+					itemId={props.id}
+				/>
+			)}
 		</div>
 	);
 };

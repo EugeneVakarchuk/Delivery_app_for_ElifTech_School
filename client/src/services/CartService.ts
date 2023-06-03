@@ -79,4 +79,16 @@ export default class CartService {
 			console.log(error);
 		}
 	}
+
+	static async removeGoodInCart(cartId: string, goodId: string) {
+		try {
+			const response = await $api.post(
+				`/cart/removeGoodInCart/${cartId}/${goodId}`
+			);
+
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }

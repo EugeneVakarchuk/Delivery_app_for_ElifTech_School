@@ -136,6 +136,28 @@ class CartService {
 			console.log(error);
 		}
 	}
+
+	async removeGoodInCart(cartId, goodId) {
+		try {
+			const cart = await CartModel.findById(cartId);
+			if (!cart) {
+				throw new Error("Cart not found");
+			}
+			const itemIndex = cart.items.findIndex(
+				(item) => item._id.toString() === goodId
+			);
+			if (itemIndex === -1) {
+				throw new Error("Item not found in cart");
+			}
+
+			cart.items.splice(itemIndex, 1);
+			await cart.save();
+
+			return cart;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = new CartService();
