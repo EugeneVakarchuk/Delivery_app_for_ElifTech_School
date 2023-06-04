@@ -18,6 +18,7 @@ Was selected the complexity of the middle in the specification.
 -   Update cart information on server and show actual info.
 -   Validation form (onBlur working) and checking valid data until submit.
 -   Creat order with sended form data, total amount, link to ID shop cart, isConfirmed and isDelivered info (default values: false).
+-   Cart data storing in LocalStorage. If you check items and leave from page your cart will be save.
 -   Created 2 dev routes for add new shop and new product item (don't using from client side).
 -   Simple styling use less.
 -   Deployed for server (Google Cloud).
