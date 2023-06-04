@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "../styles/ui.module.less";
 
 type props = {
 	shopTitle: string;
@@ -6,8 +7,8 @@ type props = {
 
 const ShopButton: React.FC<props> = (props) => {
 	return (
-		<div>
-			<h3>{props.shopTitle}</h3>
+		<div className={classes.shopButtonTitleContainer}>
+			<h3 className={classes.shopButtonTitle}>{props.shopTitle}</h3>
 		</div>
 	);
 };

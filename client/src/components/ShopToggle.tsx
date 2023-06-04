@@ -4,7 +4,7 @@ import ShopService from "../services/ShopService";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {setShop} from "../redux/shopSlice";
 import CartService from "../services/CartService";
-import {configureStore} from "@reduxjs/toolkit";
+import classes from "../styles/component.module.less";
 
 type props = {
 	shopTitle: string;
@@ -84,7 +84,7 @@ const ShopToggle: React.FC<props> = (props) => {
 	}, [selectedShop]);
 
 	return (
-		<div onClick={changeShop}>
+		<div onClick={changeShop} className={classes.shopItemContainer}>
 			<ShopButton shopTitle={props.shopTitle} />
 		</div>
 	);

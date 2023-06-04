@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {IGood} from "../models/IGood";
 import GoodItemUI from "../ui/GoodItemUI";
 import CartService from "../services/CartService";
+import classes from "../styles/component.module.less";
 
 const GoodItem: React.FC<IGood> = (props) => {
 	const goodId = props._id;
@@ -24,7 +25,7 @@ const GoodItem: React.FC<IGood> = (props) => {
 	}, []);
 
 	return (
-		<div>
+		<div className={classes.goodItemWrapper}>
 			<GoodItemUI
 				title={props.goodTitle}
 				price={props.goodPrice}
@@ -32,11 +33,18 @@ const GoodItem: React.FC<IGood> = (props) => {
 			/>
 
 			{goodAddedtoCart ? (
-				<button disabled onClick={addGoodToCart}>
+				<button
+					className={classes.goodItemButton}
+					disabled
+					onClick={addGoodToCart}>
 					Added
 				</button>
 			) : (
-				<button onClick={addGoodToCart}>Add to Cart</button>
+				<button
+					className={classes.goodItemButton}
+					onClick={addGoodToCart}>
+					Add to Cart
+				</button>
 			)}
 		</div>
 	);

@@ -3,6 +3,7 @@ import CartItemUI from "../ui/CartItemUI";
 import QuanityInput from "./QuanityInput";
 import RemoveCartItemButton from "./RemoveCartItemButton";
 import CartService from "../services/CartService";
+import classes from "../styles/component.module.less";
 
 type props = {
 	id: string;
@@ -77,7 +78,7 @@ const CartItem: React.FC<props> = (props) => {
 	};
 
 	return (
-		<div>
+		<div className={classes.cartItemContainer}>
 			<CartItemUI
 				title={props.title}
 				price={props.price}
