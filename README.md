@@ -1,6 +1,6 @@
 # Delivery App for ElifTech School
 
-This delivery app is tesk task for ElifTech School. You can trying app on the [Link](http://34.116.131.190:3000/)
+This delivery app is tesk task for ElifTech School. You can trying app on the [Link](http://35.228.185.66:3000/)
 
 Thanks ElifTech for intresting and working case test task.
 
@@ -27,11 +27,11 @@ Was selected the complexity of the middle in the specification.
 
 ## Unrealized finctionality:
 
-Because I must complited this task for 3 days, and it's my firs e-commerce pet-project, some functional didn't realize or wrong realized so in time for the deadline.
+Because I must complited this task for 3 days, and it's my firs e-commerce pet-project, some functional didn't realize or wrong realized in time for the deadline.
 
 If I had more time, I will realize:
 
--   Optimize endpoins from server. After created this project I understood, that firstly need to create theese endpointes that will useing most often. It's saved a lot of time and DRY would not be violated.
+-   Optimize endpoins from server. After created this project I understood, that firstly need to create theese endpointes that will using most often. It's saved a lot of time and DRY would not be violated.
 -   Creat placeholders for loading elements.
 -   Adaptive styles from 4-5 width's breakpoints.
 
