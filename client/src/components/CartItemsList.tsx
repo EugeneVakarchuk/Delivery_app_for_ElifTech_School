@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import CartService from "../services/CartService";
 import CartItem from "./CartItem";
+import classes from "../styles/component.module.less";
 
 const CartItemsList: React.FC = () => {
 	const cartId = localStorage.getItem("cartId");
@@ -68,24 +69,29 @@ const CartItemsList: React.FC = () => {
 	}, []);
 
 	return (
-		<div>
-			{isRemoving ? (
-				<div>Loading...</div>
-			) : (
-				goodsList.map((item, index) => (
-					<CartItem
-						key={item._id}
-						id={item._id}
-						title={item.good.goodTitle}
-						price={item.good.goodPrice}
-						imageUrl={item.good.imageUrl}
-						isRemoving={isRemoving}
-						onRemove={removeGoodsList}
-						onUpdateItemsList={onUpdateItemsList}
-					/>
-				))
-			)}
-			<div>totalAmount: {totalAmount}</div>
+		<div className={classes.cartItemsListWrapper}>
+			<div className={classes.cartItemsListContainer}>
+				{isRemoving ? (
+					<div>Loading...</div>
+				) : (
+					goodsList.map((item, index) => (
+						<CartItem
+							key={item._id}
+							id={item._id}
+							title={item.good.goodTitle}
+							price={item.good.goodPrice}
+							imageUrl={item.good.imageUrl}
+							isRemoving={isRemoving}
+							onRemove={removeGoodsList}
+							onUpdateItemsList={onUpdateItemsList}
+						/>
+					))
+				)}
+			</div>
+			<p className={classes.totalAmount}>
+				Total amount:{" "}
+				<span className={classes.totalAmountValue}>{totalAmount}</span>
+			</p>
 		</div>
 	);
 };

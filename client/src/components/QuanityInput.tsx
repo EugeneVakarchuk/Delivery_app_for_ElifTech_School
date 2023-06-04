@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import CartService from "../services/CartService";
+import classes from "../styles/component.module.less";
 
 type props = {
 	quanity: number;
@@ -20,10 +20,19 @@ const QuanityInput: React.FC<props> = (props) => {
 	};
 
 	return (
-		<div>
-			<button onClick={minusClick}>-</button>
-			<input type="number" value={props.quanity} readOnly />
-			<button onClick={plusClick}>+</button>
+		<div className={classes.quanityInputContainer}>
+			<button className={classes.quanityButton} onClick={minusClick}>
+				-
+			</button>
+			<input
+				className={classes.quanityInput}
+				type="number"
+				value={props.quanity}
+				readOnly
+			/>
+			<button className={classes.quanityButton} onClick={plusClick}>
+				+
+			</button>
 		</div>
 	);
 };

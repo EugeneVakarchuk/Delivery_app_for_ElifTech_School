@@ -3,6 +3,7 @@ import {useAppSelector} from "../hooks/redux";
 import GoodService from "../services/GoodService";
 import {IGood} from "../models/IGood";
 import GoodItem from "./GoodItem";
+import classes from "../styles/component.module.less";
 
 const GoodsList: React.FC = () => {
 	const selectedShopIdInState = useAppSelector(
@@ -35,9 +36,8 @@ const GoodsList: React.FC = () => {
 	return (
 		<div>
 			{shopIdIsLoaded ? (
-				<>
-					<h3>Goods List</h3>
-					<div>
+				<div className={classes.goodItemsWrapper}>
+					<div className={classes.goodItemsContainer}>
 						{goodsList.map((goodItem, index) => {
 							console.log(goodItem);
 							return (
@@ -51,7 +51,7 @@ const GoodsList: React.FC = () => {
 							);
 						})}
 					</div>
-				</>
+				</div>
 			) : (
 				<>loading...</>
 			)}

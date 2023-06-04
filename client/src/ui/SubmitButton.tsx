@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "../styles/ui.module.less";
 
 type props = {
 	isFormValid: boolean;
@@ -7,8 +8,9 @@ type props = {
 
 const SubmitButton: React.FC<props> = (props) => {
 	return (
-		<div>
+		<div className={classes.submitButtonContainer}>
 			<input
+				className={classes.submitButton}
 				type="submit"
 				disabled={props.isFormValid}
 				value={props.text}

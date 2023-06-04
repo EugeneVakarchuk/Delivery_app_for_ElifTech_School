@@ -1,0 +1,109 @@
+@import url(variables.less);
+
+.shopListContainer {
+	border: 2px solid @containerBorderColor;
+	border-radius: @containerBorderRadius;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 30px;
+}
+
+.shopListTitle {
+	margin-bottom: 20px;
+}
+
+.shopItemContainer {
+	border: 2px solid @containerBorderColor;
+	border-radius: @containerBorderRadius;
+	margin-bottom: 15px;
+	cursor: pointer;
+	width: 200px;
+	padding: 10px 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.goodItemsWrapper {
+	padding: 20px 50px;
+	border: 2px solid @containerBorderColor;
+	border-radius: @containerBorderRadius;
+	margin-left: 20px;
+}
+
+.goodItemsContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.goodItemWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 20px;
+	padding: 10px;
+	border: 1px solid @containerBorderColor;
+	border-radius: @containerBorderRadius;
+}
+
+.goodItemButton {
+	margin-top: 20px;
+	padding: 5px 25px;
+}
+
+.cartItemsListWrapper {
+	border: 2px solid @containerBorderColor;
+	border-radius: @containerBorderRadius;
+	margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.cartItemsListContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.cartItemContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 20px;
+	padding: 10px;
+	border: 1px solid @containerBorderColor;
+	border-radius: @containerBorderRadius;
+}
+
+.quanityInputContainer {
+	margin-bottom: 15px;
+}
+
+.quanityInput {
+	max-width: 60px;
+	font-size: 30px;
+	margin: 0 20px;
+	text-align: center;
+}
+
+.quanityButton {
+	min-width: 40px;
+	font-size: 30px;
+	border-radius: 5px;
+}
+
+.removeButton {
+	border-radius: 8px;
+	font-size: 20px;
+	padding: 10px 30px;
+}
+
+.totalAmount {
+	font-size: 32px;
+	margin-bottom: 20px;
+}
+
+.totalAmountValue {
+	font-weight: 600;
+}

@@ -4,6 +4,7 @@ import {useAppDispatch} from "../hooks/redux";
 import CartService from "../services/CartService";
 import {setShop} from "../redux/shopSlice";
 import ShopToggle from "./ShopToggle";
+import classes from "../styles/component.module.less";
 
 const ShopList: React.FC = () => {
 	const [shops, setShops] = useState([]);
@@ -73,8 +74,8 @@ const ShopList: React.FC = () => {
 	}, [shops, shopListLoaded]);
 
 	return (
-		<aside>
-			<h2>Shops</h2>
+		<aside className={classes.shopListContainer}>
+			<h3 className={classes.shopListTitle}>Shops</h3>
 			<div>
 				{shops.map((shop, index) => (
 					<ShopToggle key={index} shopTitle={shop} />

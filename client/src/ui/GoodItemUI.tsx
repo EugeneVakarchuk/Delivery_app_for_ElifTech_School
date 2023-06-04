@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "../styles/ui.module.less";
 
 type props = {
 	title: string;
@@ -8,10 +9,15 @@ type props = {
 
 const GoodItemUI: React.FC<props> = (props) => {
 	return (
-		<div>
-			<h3>{props.title}</h3>
-			<p>{props.price}</p>
-			<img src={props.imgUrl} alt={props.title}></img>
+		<div className={classes.goodItem}>
+			<img
+				className={classes.goodItemImg}
+				src={props.imgUrl}
+				alt={props.title}></img>
+			<div className={classes.goodInfoContainer}>
+				<h3 className={classes.goodItemTitle}>{props.title}</h3>
+				<p className={classes.goodItemPrice}>{props.price}</p>
+			</div>
 		</div>
 	);
 };

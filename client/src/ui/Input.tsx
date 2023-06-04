@@ -1,5 +1,6 @@
 import React, {InputHTMLAttributes} from "react";
 import {UseFormRegisterReturn} from "react-hook-form";
+import classes from "../styles/ui.module.less";
 
 interface props extends InputHTMLAttributes<HTMLInputElement> {
 	label: string;
@@ -11,14 +12,23 @@ interface props extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input: React.FC<props> = (props) => {
 	return (
-		<div>
-			<label>{props.label}</label>
+		<div className={classes.InputContainer}>
+			<label className={classes.label}>{props.label}</label>
 			<input
+				className={
+					props.errors
+						? `${classes.input} ${classes.InputError}`
+						: classes.input
+				}
 				placeholder={props.placeholder}
 				type={props.type}
 				{...props.register}
 			/>
-			<div>{props.errors && <span>{props.errors}</span>}</div>
+			<div className={classes.errorContainer}>
+				{props.errors && (
+					<span className={classes.errorText}>{props.errors}</span>
+				)}
+			</div>
 		</div>
 	);
 };
