@@ -1,6 +1,6 @@
 # Delivery App for ElifTech School
 
-This delivery app is tesk task for ElifTech School. You can trying app on the [Link](http://34.116.131.190:3000/)
+This delivery app is tesk task for ElifTech School. You can trying app on the [Link](http://34.116.131.190:3000/){:target="\_blank"}
 
 Thanks ElifTech for intresting and working case test task.
 
