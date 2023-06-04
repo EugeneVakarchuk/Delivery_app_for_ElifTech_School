@@ -1,10 +1,12 @@
 # Delivery App for ElifTech School
 
 This delivery app is tesk task for ElifTech School.
+
 Thanks ElifTech for intresting and working case test task.
+
 Was selected the complexity of the middle in the specification.
 
---
+---
 
 ## Implemented functionality:
 
@@ -19,7 +21,7 @@ Was selected the complexity of the middle in the specification.
 -   Created 2 dev routes for add new shop and new product item (don't using from client side).
 -   Simple styling use less.
 
---
+---
 
 ## Unrealized finctionality:
 
