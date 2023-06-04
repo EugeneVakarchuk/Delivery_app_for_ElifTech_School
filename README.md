@@ -1,6 +1,6 @@
 # Delivery App for ElifTech School
 
-This delivery app is tesk task for ElifTech School.
+This delivery app is tesk task for ElifTech School. You can trying app on the [Link](http://34.116.131.190:3000/)
 
 Thanks ElifTech for intresting and working case test task.
 
@@ -20,6 +20,7 @@ Was selected the complexity of the middle in the specification.
 -   Creat order with sended form data, total amount, link to ID shop cart, isConfirmed and isDelivered info (default values: false).
 -   Created 2 dev routes for add new shop and new product item (don't using from client side).
 -   Simple styling use less.
+-   Deployed for server (Google Cloud).
 
 ---
 
