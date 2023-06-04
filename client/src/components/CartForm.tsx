@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form";
 import SubmitButton from "../ui/SubmitButton";
 import OrderService from "../services/OrderService";
 import {useNavigate} from "react-router";
+import classes from "../styles/component.module.less";
 
 const CartForm: React.FC = () => {
 	const cartId = localStorage.getItem("cartId");
@@ -40,7 +41,9 @@ const CartForm: React.FC = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className={classes.formCotainer}>
 			<div>
 				<Input
 					label="Name:"
